@@ -4,7 +4,8 @@ const recordSchema = mongoose.Schema({
     boxname : String,
     taskname : String,
     priority:String,
-    comment:String
+    comment:String,
+    date:String
 })
 
 

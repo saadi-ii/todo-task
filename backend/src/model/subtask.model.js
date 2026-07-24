@@ -3,7 +3,8 @@ const mongoose = require("mongoose")
 const subtaskSchema = mongoose.Schema({
     taskname : String,
     subtaskname : String,
-    priority:String
+    priority:String,
+    date:String
 })
 
 

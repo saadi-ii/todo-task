@@ -1,10 +1,11 @@
-import React from 'react'
-import Boxes from "./Boxes"
+import CreateBox from './CreateBox'
 
 const page = () => {
+
+  
   return (
     <div>
-      <Boxes/>
+      <CreateBox/>
     </div>
   )
 }

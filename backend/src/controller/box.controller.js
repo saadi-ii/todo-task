@@ -38,7 +38,18 @@ const box = async(req,res) => {
     })
 }
 
+const deleteBox = async(req,res) => {
+    const data = req.query
+    const boxes = await boxModel.findOneAndDelete({
+        boxname:data.boxname
+    })
+    
+    res.status(200).json({
+        message:"deleted"
+    })
+}
 
 
 
-module.exports = {createBox,box}
+
+module.exports = {createBox,box,deleteBox}

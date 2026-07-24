@@ -3,8 +3,8 @@
 import React from 'react'
 import TaskName from './task/header/TaskName'
 import MarkComplete from './task/header/MarkComplete'
-import AddSubtask from './task/header/AddSubtask'
 import Rename from './task/header/Rename'
+import Delete from './task/header/Delete'
 import Assignee from './task/main/Assignee'
 import DueDate from './task/main/DueDate'
 import Priority from './task/main/Priority'
@@ -18,12 +18,13 @@ const Task = (props) => {
         <div className='flex gap-0.5 border rounded-lg p-1 border-gray-300'>
           <MarkComplete taskname={props.taskname} subtaskname={props.subtaskname}/>
           <Rename taskname={props.taskname} subtaskname={props.subtaskname}/>
+          <Delete taskname={props.taskname} subtaskname={props.subtaskname} boxname={""}/>
         </div>
       </header>
       <main className='flex gap-0.5'>
         <Assignee />
-        <DueDate />
-        <Priority taskname={props.taskname} subtaskname={props.subtaskname}/>
+        <DueDate  taskname={props.taskname} boxname={""} subtaskname={props.subtaskname}/>
+        <Priority taskname={props.taskname} boxname={""} subtaskname={props.subtaskname}/>
       </main>
       <footer className='flex items-center gap-2'>
         <Subtask />

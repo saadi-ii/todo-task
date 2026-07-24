@@ -7,6 +7,7 @@ import TaskName from "./task/header/TaskName";
 import MarkComplete from "./task/header/MarkComplete";
 import AddSubtask from "./task/header/AddSubtask";
 import Rename from "./task/header/Rename";
+import Delete from "./task/header/Delete";
 
 import Assignee from "./task/main/Assignee";
 import DueDate from "./task/main/DueDate";
@@ -19,6 +20,7 @@ const Task = (props) => {
   const [task, setTask] = useState([]);
   const [Visibility, setVisibility] = useState("hidden");
   const [Visibility2, setVisibility2] = useState("hidden");
+  const [Fetch, setFetch] = useState(false)
   const handleSubmit = async (e) => {
     e.preventDefault();
     const comment = e.target.comment.value
@@ -30,7 +32,7 @@ const Task = (props) => {
     })
       .then(() => {
         setVisibility2("hidden")
-        location.reload()
+        setFetch(true)
       })
       .catch((err) => {
         console.log(err);
@@ -47,7 +49,7 @@ useEffect(() => {
     .catch((err) => {
       console.log(err);
     });
-}, []);
+}, [Fetch]);
 
 const handleBoxClick = () => {
   setVisibility2("visible");
@@ -64,13 +66,14 @@ return (
         <MarkComplete taskname={props.taskname} subtaskname=""/>
         <AddSubtask taskname={props.taskname} />
         <Rename  taskname={props.taskname} subtaskname=""/>
+        <Delete  taskname={props.taskname} subtaskname="" boxname={props.boxname} />
       </div>
     </header>
 
     <main className="flex gap-0.5" onClick={(e) => e.stopPropagation()}>
       <Assignee />
-      <DueDate />
-      <Priority taskname={props.taskname} subtaskname=""/>
+      <DueDate  taskname={props.taskname}  boxname={props.boxname} subtaskname=""/>
+      <Priority taskname={props.taskname}  boxname={props.boxname} subtaskname=""/>
     </main>
     <footer className="flex items-center gap-2">
       <Subtask />
@@ -98,21 +101,16 @@ return (
       })}
     </div>
 
-    {Visibility2 === "visible" && (
-      <div
-        className="absolute flex justify-center items-center w-300 h-100"
-        onClick={() => setVisibility2("hidden")}
-      >
-        <div
-          onClick={(e) => e.stopPropagation()}
-        >
+    {/* {Visibility2 === "visible" && (
+      <div className="absolute flex justify-center items-center w-300 h-100" onClick={() => setVisibility2("hidden")} >
+        <div onClick={(e) => e.stopPropagation()}>
           <form className={`${Visibility2} flex flex-col justify-center items-center`} onSubmit={handleSubmit}>
             <textarea name="comment" id='comment' placeholder='Comments' className='text-xl border px-2 rounded-xl border-gray-600 w-80 h-40 flex justify-center items-center'></textarea>
             <input type="submit" value="Submit" className='rounded-xl bg-gray-600 w-fit px-2 text-white mt-1 text-2xl' />
           </form>
         </div>
       </div>
-    )}
+    )} */}
   </div>
 );
 
